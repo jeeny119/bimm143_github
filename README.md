@@ -1,7 +1,7 @@
 # BIMM143
 My classwork from [BIMM143 S25](https://bioboot.github.io/bimm143_S25/) at UC San Diego.
 
-- 04 [Into to R]() 
+- 04 [Into to R](https://github.com/jeeny119/bimm143_github/blob/main/Class04/Class04.md) 
 
 - 05 [Advanced graphics with **ggplot2**](https://github.com/jeeny119/bimm143_github/blob/main/Class05/class05.md)
 
@@ -22,16 +22,6 @@ My classwork from [BIMM143 S25](https://bioboot.github.io/bimm143_S25/) at UC Sa
 - 13 [Transcriptomics, RNA-Seq analysis, and the interpretation of gene lists]()
 
 - 14 [RNA-Seq mini project]()
-
-- 15 []
-
-- 16
-
-- 17
-
-- 18
-
-
 
 
 
