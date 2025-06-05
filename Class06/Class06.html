@@ -58,16 +58,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="Class06_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Class06_files/libs/quarto-html/quarto.js"></script>
-<script src="Class06_files/libs/quarto-html/popper.min.js"></script>
-<script src="Class06_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="Class06_files/libs/quarto-html/anchor.min.js"></script>
-<link href="Class06_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Class06_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="Class06_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="Class06_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Class06_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="class06_files/libs/clipboard/clipboard.min.js"></script>
+<script src="class06_files/libs/quarto-html/quarto.js"></script>
+<script src="class06_files/libs/quarto-html/popper.min.js"></script>
+<script src="class06_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="class06_files/libs/quarto-html/anchor.min.js"></script>
+<link href="class06_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="class06_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="class06_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="class06_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="class06_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -75,8 +75,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-  
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#function-basics" id="toc-function-basics" class="nav-link active" data-scroll-target="#function-basics">1. Function basics</a></li>
+  <li><a href="#generate-dna-sequence" id="toc-generate-dna-sequence" class="nav-link" data-scroll-target="#generate-dna-sequence">2. Generate DNA sequence</a></li>
+  <li><a href="#generate-protein-function" id="toc-generate-protein-function" class="nav-link" data-scroll-target="#generate-protein-function">3. Generate Protein function</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="class06.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -105,6 +113,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="function-basics" class="level2">
+<h2 class="anchored" data-anchor-id="function-basics">1. Function basics</h2>
 <p>Let’s start writing our first silly function to add some numbers:</p>
 <p>Every R function has 3 things:</p>
 <ul>
@@ -143,6 +153,221 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 111</code></pre>
 </div>
 </div>
+<blockquote class="blockquote">
+<p>Q. Write a function to return a DNA sequence of a user speficified length? Call it <code>generate_dna()</code></p>
+</blockquote>
+<p>The <code>sample()</code> function can help here</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#generate_dna &lt;- function(size=5){ }</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"jeff"</span>, <span class="st">"jeremy"</span>, <span class="st">"peter"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(students, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "jeremy" "jeremy" "jeff"   "jeff"   "jeff"  </code></pre>
+</div>
+</div>
+</section>
+<section id="generate-dna-sequence" class="level2">
+<h2 class="anchored" data-anchor-id="generate-dna-sequence">2. Generate DNA sequence</h2>
+<p>Now work with <code>bases</code> rather than <code>students</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bases <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(bases, <span class="at">size=</span><span class="dv">10</span>, <span class="at">replace=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "G" "G" "T" "A" "C" "T" "T" "C" "T" "C"</code></pre>
+</div>
+</div>
+<p>Now I have a working ‘snippet’ of code I can use this as the body of my first function version here:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>generate_dna <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">size=</span><span class="dv">5</span>){ </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  bases <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(bases, <span class="at">size=</span>size, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_dna</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "G" "T" "T" "T" "A" "G" "T" "G" "G" "A" "T" "G" "T" "C" "G" "T" "T" "G"
+ [19] "C" "A" "A" "C" "G" "A" "A" "T" "A" "T" "C" "T" "T" "C" "G" "C" "A" "C"
+ [37] "A" "C" "A" "C" "G" "T" "A" "C" "T" "T" "G" "C" "C" "C" "T" "T" "G" "T"
+ [55] "C" "T" "A" "A" "T" "A" "G" "A" "G" "C" "C" "G" "A" "A" "C" "A" "G" "C"
+ [73] "T" "G" "C" "G" "G" "G" "G" "A" "C" "C" "A" "C" "T" "C" "A" "T" "A" "A"
+ [91] "A" "T" "G" "G" "C" "G" "C" "T" "T" "C"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_dna</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "G" "G" "G" "A" "G"</code></pre>
+</div>
+</div>
+<p>I want the ability to return a sequence like “AGTACCTG” i.e.&nbsp;a one element vector where the bases are all together.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>generate_dna <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">size=</span><span class="dv">5</span>, <span class="at">together=</span><span class="cn">TRUE</span>){ </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  bases <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"G"</span>, <span class="st">"T"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  sequence <span class="ot">&lt;-</span> <span class="fu">sample</span>(bases, <span class="at">size=</span>size, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(together) {</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    sequence <span class="ot">&lt;-</span> <span class="fu">paste</span>(sequence, <span class="at">collapse=</span> <span class="st">""</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sequence)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_dna</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CTTAG"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_dna</span>(<span class="at">together=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "G" "G" "T" "C" "G"</code></pre>
+</div>
+</div>
+</section>
+<section id="generate-protein-function" class="level2">
+<h2 class="anchored" data-anchor-id="generate-protein-function">3. Generate Protein function</h2>
+<p>We can get the set of 20 natural amino-acids from the <strong>bio3d</strong> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>aa <span class="ot">&lt;-</span> bio3d<span class="sc">::</span>aa.table<span class="sc">$</span>aa1[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Q. Write a protein sequence generating function that will return sequences of a user specified length?</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>generate_protein <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">size=</span><span class="dv">6</span>, <span class="at">together=</span><span class="cn">TRUE</span>){</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Get the 20 amino-acids as a vector </span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  aa <span class="ot">&lt;-</span> bio3d<span class="sc">::</span>aa.table<span class="sc">$</span>aa1[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  sequence_protein <span class="ot">&lt;-</span> <span class="fu">sample</span>(aa, <span class="at">size=</span>size, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Optionally return a single element string</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(together) {</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    sequence_protein <span class="ot">&lt;-</span> <span class="fu">paste</span>(sequence_protein, <span class="at">collapse=</span> <span class="st">""</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sequence_protein)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_protein</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "QQHRDP"</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Q. Generate random protein sequences of length 6 to 12 amino acids.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_protein</span>(<span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "SQLEEPI"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_protein</span>(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "YQGHRGHN"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_protein</span>(<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "EFRFQHMYD"</code></pre>
+</div>
+</div>
+<p>We can fix this inability to generate multiple sequences by either editing and adding to the function body code (e.g.&nbsp;a for loop) or by using the R <strong>apply</strong> family of utility functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>, generate_protein)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "WFRPTF"       "EVNHCYL"      "ITFVLWSA"     "RCIAETPFH"    "KLICFSRFRG"  
+[6] "KNVIHIREPEP"  "YSDIREGFISDS"</code></pre>
+</div>
+</div>
+<p>It would be cool and useful if I could get FASTA format output</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>, generate_protein)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "YDAENY"       "YHETTYP"      "WPMSQTKK"     "KAKVNDPRT"    "FQEQRFHFYA"  
+[6] "FLHRWHIHTLW"  "YAFHMPEILRAE"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(ans, <span class="at">sep=</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>YDAENY
+YHETTYP
+WPMSQTKK
+KAKVNDPRT
+FQEQRFHFYA
+FLHRWHIHTLW
+YAFHMPEILRAE</code></pre>
+</div>
+</div>
+<p>I want this to look like</p>
+<pre><code>&gt;ID.6 
+YEMMAH
+&gt;ID.7
+FCMSIMN
+&gt;ID.8
+QLDAFIGY</code></pre>
+<p>The functions <code>paste()</code> and <code>cat()</code> can help us here…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"&gt;ID."</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>,<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, ans, <span class="at">sep=</span> <span class="st">""</span>), <span class="at">sep=</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&gt;ID.6
+YDAENY
+&gt;ID.7
+YHETTYP
+&gt;ID.8
+WPMSQTKK
+&gt;ID.9
+KAKVNDPRT
+&gt;ID.10
+FQEQRFHFYA
+&gt;ID.11
+FLHRWHIHTLW
+&gt;ID.12
+YAFHMPEILRAE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>id.line <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"&gt;ID."</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>id.line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "&gt;ID.6"  "&gt;ID.7"  "&gt;ID.8"  "&gt;ID.9"  "&gt;ID.10" "&gt;ID.11" "&gt;ID.12"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>id.line <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"&gt;ID."</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>seq.line <span class="ot">&lt;-</span> <span class="fu">paste</span>(id.line, ans, <span class="at">sep=</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(seq.line, <span class="at">sep=</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&gt;ID.6
+YDAENY
+&gt;ID.7
+YHETTYP
+&gt;ID.8
+WPMSQTKK
+&gt;ID.9
+KAKVNDPRT
+&gt;ID.10
+FQEQRFHFYA
+&gt;ID.11
+FLHRWHIHTLW
+&gt;ID.12
+YAFHMPEILRAE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>id.line <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"&gt;ID."</span>, <span class="dv">6</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">sep=</span><span class="st">""</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>seq.line <span class="ot">&lt;-</span> <span class="fu">paste</span>(id.line, ans, <span class="at">sep=</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(seq.line, <span class="at">sep=</span><span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file=</span><span class="st">"myseq.fa"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Q. Determine if these sequences can be found in nature or are they unique? Why or why not?</p>
+</blockquote>
+<p>I BLASTp searched my FASTA format sequences against NR and found that length 6, 7, 8 are not unique and can be found in the databases with 100% coverage and 100% identity.</p>
+<p>Random sequences of length 9 and above are unique and can’t be found in the databases.</p>
+</section>
 
 </main>
 <!-- /main column -->
