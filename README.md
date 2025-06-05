@@ -23,16 +23,6 @@ My classwork from [BIMM143 S25](https://bioboot.github.io/bimm143_S25/) at UC Sa
 
 - 14 [RNA-Seq mini project]()
 
-- 15 []
-
-- 16
-
-- 17
-
-- 18
-
-
-
 
 
 
