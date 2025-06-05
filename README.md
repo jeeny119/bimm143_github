@@ -23,6 +23,8 @@ My classwork from [BIMM143 S25](https://bioboot.github.io/bimm143_S25/) at UC Sa
 
 - 14 [RNA-Seq analysis mini-project](https://github.com/jeeny119/bimm143_github/blob/main/Class014/Class14.md)
 
+- 18 [Investigating pertussis resurgence mini project](https://github.com/jeeny119/bimm143_github/blob/main/Class018/class18.md)
+
 
 
 
