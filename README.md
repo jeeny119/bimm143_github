@@ -11,17 +11,17 @@ My classwork from [BIMM143 S25](https://bioboot.github.io/bimm143_S25/) at UC Sa
 
 - 08 [Breast cancer mini project](https://github.com/jeeny119/bimm143_github/blob/main/Class08/Class8.md)
 
-- 09 [Halloween Candy Mini-Project]()
+- 09 [Halloween Candy Mini-Project](https://github.com/jeeny119/bimm143_github/blob/main/Class09/Class9.md)
 
-- 10 [Structural Bioinformatics (pt1)]()
+- 10 [Structural Bioinformatics (pt1)](https://github.com/jeeny119/bimm143_github/blob/main/Class010/Class10.md)
 
-- 11 [Structural Bioinformatics (pt2 AlphaFold)]()
+- 11 [Structural Bioinformatics (pt2 AlphaFold)](https://github.com/jeeny119/bimm143_github/blob/main/Class010/Class11_pt2.md)
 
-- 12 [Genome informatics and high throughput sequencing]()
+- 12 [Genome informatics and high throughput sequencing](https://github.com/jeeny119/bimm143_github/blob/main/Class012/Class12.md)
 
-- 13 [Transcriptomics, RNA-Seq analysis, and the interpretation of gene lists]()
+- 13 [Transcriptomics, RNA-Seq analysis, and the interpretation of gene lists](https://github.com/jeeny119/bimm143_github/blob/main/Class013/Class13.md)
 
-- 14 [RNA-Seq mini project]()
+- 14 [RNA-Seq analysis mini-project](https://github.com/jeeny119/bimm143_github/blob/main/Class014/Class14.md)
 
 
 
