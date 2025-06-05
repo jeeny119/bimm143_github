@@ -1,0 +1,85 @@
+---
+title: "Find a Gene Project: Final"
+author: "Yoonjin Lim (PID: A16850635)"
+format: pdf
+toc: true 
+---
+
+Question 7: Creating Heatmap
+
+```{r}
+library(bio3d)
+
+pth <- "QuerySequence_93902/"
+pdb.files <- list.files(path=pth, full.names = TRUE, pattern = ".pdb")
+```
+
+Align and superpose all these models. 
+```{r}
+file.exists(pdb.files)
+```
+
+```{r}
+pdbs <- pdbaln(pdb.files, fit=TRUE, exefile="msa")
+```
+
+```{r}
+#view.pdbs(pdbs)
+```
+
+```{r}
+plot (pdbs$b[1,], typ ="l", ylim=c(0,100), ylab="pLDDT score")
+lines (pdbs$b[2,], typ ="l", col="blue")
+lines (pdbs$b[3,], typ ="l", col="green")
+lines (pdbs$b[4,], typ ="l", col="orange")
+lines (pdbs$b[5,], typ ="l", col="red")
+```
+
+```{r}
+fasta <- bio3d::read.fasta("muscle-I20250525-034425-0597-74261255-p1m.fa")
+# fasta <- read.fasta(system.file("muscle-I20250525-034425-0597-74261255-p1m.fa", package="bio3d"))
+```
+
+```{r}
+matrix <- seqidentity(fasta$ali)
+```
+
+```{r}
+# pheatmap(matrix,
+#         cluster_rows = TRUE,
+ #        cluster_cols = TRUE,
+  #       main = "Sequence Identity Heatmap",
+   #      fontsize = 7,
+    #     fontsize_number = 7,
+     #    cellwidth = 15,
+      #   cellheight = 15) 
+```
+
+
+Question 8: 
+
+```{r}
+library(bio3d)
+```
+
+```{r}
+blast <- blast.pdb(fasta)
+```
+
+```{r}
+attributes(blast)
+```
+
+```{r}
+head(blast$hit.tbl,10)
+```
+
+```{r}
+hits<- plot(blast)
+```
+
+```{r}
+hits$pdb.id
+```
+
+Question 9: 

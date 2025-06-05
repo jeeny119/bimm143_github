@@ -1,0 +1,75 @@
+Started Tue May 20 21:12:23 2025
+/muscle/bin/muscle -in muscle-I20250520-211216-0621-20390558-p1m.sequence -verbose -log muscle-I20250520-211216-0621-20390558-p1m.output -quiet -clw -out muscle-I20250520-211216-0621-20390558-p1m.clw 
+Alphabet Amino
+
+MUSCLE v3.8.425 by Robert C. Edgar
+http://www.drive5.com/muscle
+
+Profile-profile score    LE
+Max iterations           8
+Max trees                1
+Max time                 (No limit)
+Max MB                   4294966866
+Gap open                 -2.9
+Gap extend (dimer)       0
+Gap ambig factor         0
+Gap ambig penalty        -0
+Center (LE)              -0.52
+Term gaps                Half
+Smooth window length     7
+Refine window length     200
+Min anchor spacing       32
+Min diag length (lambda) 24
+Diag margin (mu)         5
+Min diag break           1
+Hydrophobic window       5
+Hydrophobic gap factor   1.2
+Smooth score ceiling     3
+Min best col score       2
+Min anchor score         1
+SUEFF                    0.1
+Brenner root MSA         False
+Normalize counts         True
+Diagonals (1)            False
+Diagonals (2)            False
+Anchors                  True
+MSF output format        False
+Phylip interleaved       False
+Phylip sequential        False
+ClustalW output format   True
+Catch exceptions         True
+Quiet                    True
+Refine                   False
+ProdfDB                  False
+Low complexity profiles  True
+Objective score          SPM
+Distance method (1)      Kmer6_6
+Clustering method (1)    UPGMB
+Root method (1)          Pseudo
+Sequence weighting (1)   ClustalW
+Distance method (2)      PctIdKimura
+Clustering method (2)    UPGMB
+Root method (2)          Pseudo
+Sequence weighting (2)   ClustalW
+
+Elapsed time 00:00:00  Peak memory use   11 MB(-2%)  Iteration   1 K-mer dist pass 1
+Elapsed time 00:00:00  Peak memory use   11 MB(-2%)  Iteration   1 K-mer dist pass 2
+Align: (D.magna|BAJ72723.1:72-193 2-domain hemoglobin [Daphnia magna]) (D.sinensis|KAI9562899.1:72-193 2-domain hemoglobin [Daphnia sinensis])
+Align: (D.exilis|AAM22889.1:26-147 2-domain hemoglobin protein subunit, partial [Daphnia exilis]) (D.spinulata|AAM22885.1:24-145 2-domain hemoglobin protein subunit, partial [Daphnia spinulata])
+Align: (D.carinata|XP_057367319.1:71-192 uncharacterized protein LOC130688363 isoform X1 [Daphnia carinata]) (D.exilis|AAM22889.1:26-147 2-domain hemoglobin protein subunit, partial [Daphnia exilis],D.spinulata|AAM22885.1:24-145 2-domain hemoglobin protein subunit, partial [Daphnia spinulata])
+Align: (D.magna|BAJ72723.1:72-193 2-domain hemoglobin [Daphnia magna],D.sinensis|KAI9562899.1:72-193 2-domain hemoglobin [Daphnia sinensis]) (D.carinata|XP_057367319.1:71-192 uncharacterized protein LOC130688363 isoform X1 [Daphnia carinata],D.exilis|AAM22889.1:26-147 2-domain hemoglobin protein subunit, partial [Daphnia exilis],D.spinulata|AAM22885.1:24-145 2-domain hemoglobin protein subunit, partial [Daphnia spinulata])
+Align: (Japanese_water_flea|BAB62535.1:73-194 hemoglobin chain [Moina macrocopa]) (D.magna|BAJ72723.1:72-193 2-domain hemoglobin [Daphnia magna],D.sinensis|KAI9562899.1:72-193 2-domain hemoglobin [Daphnia sinensis],D.carinata|XP_057367319.1:71-192 uncharacterized protein LOC130688363 isoform X1 [Daphnia carinata],D.exilis|AAM22889.1:26-147 2-domain hemoglobin protein subunit, partial [Daphnia exilis],D.spinulata|AAM22885.1:24-145 2-domain hemoglobin protein subunit, partial [Daphnia spinulata])
+Align: (D.pulex_protein[sequence taken from BLAST result]) (Japanese_water_flea|BAB62535.1:73-194 hemoglobin chain [Moina macrocopa],D.magna|BAJ72723.1:72-193 2-domain hemoglobin [Daphnia magna],D.sinensis|KAI9562899.1:72-193 2-domain hemoglobin [Daphnia sinensis],D.carinata|XP_057367319.1:71-192 uncharacterized protein LOC130688363 isoform X1 [Daphnia carinata],D.exilis|AAM22889.1:26-147 2-domain hemoglobin protein subunit, partial [Daphnia exilis],D.spinulata|AAM22885.1:24-145 2-domain hemoglobin protein subunit, partial [Daphnia spinulata])
+Align: (Human_myoglobin|NP_001349775.1) (D.pulex_protein[sequence taken from BLAST result],Japanese_water_flea|BAB62535.1:73-194 hemoglobin chain [Moina macrocopa],D.magna|BAJ72723.1:72-193 2-domain hemoglobin [Daphnia magna],D.sinensis|KAI9562899.1:72-193 2-domain hemoglobin [Daphnia sinensis],D.carinata|XP_057367319.1:71-192 uncharacterized protein LOC130688363 isoform X1 [Daphnia carinata],D.exilis|AAM22889.1:26-147 2-domain hemoglobin protein subunit, partial [Daphnia exilis],D.spinulata|AAM22885.1:24-145 2-domain hemoglobin protein subunit, partial [Daphnia spinulata])
+Elapsed time 00:00:00  Peak memory use   13 MB(-2%)  Iteration   1 Align node
+Elapsed time 00:00:00  Peak memory use   13 MB(-2%)  Iteration   1 Root alignment
+Elapsed time 00:00:00  Peak memory use   13 MB(-2%)  Iteration   2 Refine tree
+Elapsed time 00:00:00  Peak memory use   13 MB(-2%)  Iteration   2 Root alignment
+Elapsed time 00:00:00  Peak memory use   13 MB(-2%)  Iteration   2 Root alignment
+Anchor columns found       3
+DP area saved by anchors   64.2%
+Elapsed time 00:00:00  Peak memory use   13 MB(-2%)  Iteration   3 Refine biparts
+Elapsed time 00:00:00  Peak memory use   13 MB(-2%)  Iteration   4 Refine biparts
+Elapsed time 00:00:00  Peak memory use   13 MB(-2%)  Iteration   5 Refine biparts
+Elapsed time 00:00:00  Peak memory use   13 MB(-2%)  Iteration   6 Refine biparts
+Finished Tue May 20 21:12:23 2025

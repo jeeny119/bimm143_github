@@ -1,0 +1,331 @@
+---
+title: "Class 14: RNASeq mini-project"
+author: "Yoonjin Lim (PID: A16850635)"
+format: pdf
+toc: true
+---
+
+Here we will perform a complete RNASeq analysis from counts to pathways and biological interpretation. 
+
+The data for for hands-on session comes from GEO entry: GSE37704, which is associated with the following publication:
+
+- Trapnell C, Hendrickson DG, Sauvageau M, Goff L et al. "Differential analysis of gene regulation at transcript resolution with RNA-seq". Nat Biotechnol 2013 Jan;31(1):46-53. PMID: 23222703
+
+The authors report on differential analysis of lung fibroblasts in response to loss of the developmental transcription factor HOXA1.
+
+# Differential Expression Analysis
+
+## Required packages
+
+```{r, message=FALSE}
+library(DESeq2)
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+library(pathview)
+library(gage)
+library(gageData)
+```
+
+## Data import
+
+```{r}
+colData <- read.csv("GSE37704_metadata.csv", row.names=1)
+countData <- read.csv("GSE37704_featurecounts.csv", row.name=1)
+```
+
+```{r}
+head(colData)
+```
+
+```{r}
+head(countData)
+```
+
+Check the corespondance of colData row and countData columns. 
+
+```{r}
+rownames(colData)
+```
+
+```{r}
+colnames(countData)
+```
+
+> Q. Remove the troublesome first column so we match the metadata. [Labsheet Question: Complete the code below to remove the troublesome first column from countData]
+
+```{r}
+counts <- countData[,-1]
+```
+
+```{r}
+head(counts)
+```
+
+```{r}
+all (rownames(colData) == colnames(counts))
+```
+
+To remove the first column ... 
+
+```{r}
+all(c(T,T,T))
+```
+
+## Remove zero count genes 
+
+We will have rows in `counts` for genes that we can not say anything about because they have zero expression in the particular tissue we are looking at. 
+
+```{r}
+head(counts)
+```
+
+If the `rowSums()` is zero then a give gene (i.e. row) has no count data and we should exclude these genes from further consideration. 
+
+```{r}
+to.keep <- rowSums(counts) != 0
+cleancounts <- counts[to.keep,]
+```
+ 
+> Q. How many genes do we have left? 
+
+```{r}
+nrow(cleancounts)
+```
+
+## Setup DeSeq object for analysis 
+
+```{r}
+dds <- DESeqDataSetFromMatrix(countData = cleancounts, 
+                              colData = colData, 
+                              design = ~condition)
+```
+
+# Run DESeq analysis 
+
+```{r}
+dds <- DESeq(dds)
+```
+```{r}
+dds
+```
+
+## Extract the results 
+
+```{r}
+res <- results(dds)
+head(res)
+```
+
+> Q. Call the summary() function on your results to get a sense of how many genes are up or down-regulated at the default 0.1 p-value cutoff.
+
+```{r}
+summary(res)
+```
+
+## Add Gene annotation 
+
+```{r}
+head(res)
+```
+
+```{r}
+head(rownames(res))
+```
+
+```{r}
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+```
+
+```{r}
+columns(org.Hs.eg.db)
+```
+
+```{r}
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+
+columns(org.Hs.eg.db)
+
+res$symbol <- mapIds(org.Hs.eg.db,
+                    keys=rownames(res), 
+                    keytype="ENSEMBL",
+                    column="SYMBOL",
+                    multiVals="first")
+
+res$entrez <- mapIds(org.Hs.eg.db,
+                    keys=rownames(res),
+                    keytype="ENSEMBL",
+                    column="ENTREZID",
+                    multiVals="first")
+
+res$name <- mapIds(org.Hs.eg.db,
+                    keys=row.names(res),
+                    keytype="ENSEMBL",
+                    column="GENENAME",
+                    multiVals="first")
+
+head(res, 10)
+```
+
+## Save my results to a CSV file
+
+```{r}
+res = res[order(res$pvalue),]
+write.csv(res, file="deseq_results.csv")
+```
+
+## Result visualization 
+
+```{r}
+mycols <- rep("gray", nrow(res))
+mycols[res$log2FoldChange <= -2] <- "blue"
+mycols[res$log2FoldChange >= +2] <- "blue"
+mycols[res$padj >= 0.05] <- "gray"
+
+#mycols
+plot(res$log2FoldChange, -log(res$padj), col=mycols, xlab="Log2(FoldChange)", ylab="-Log(P-value)")
+abline(v=-2, col="red")
+abline(v=+2, col="red")
+abline(h=-log(0.05), col="red")
+```
+
+```{r}
+library(ggplot2)
+library(ggrepel)
+
+ggplot(res) + 
+  aes(log2FoldChange, -log(padj), label=res$symbol) + 
+  geom_point(col=mycols) + 
+  geom_text_repel(size=4, max.overlaps = 8)
+```
+
+```{r}
+ggplot(as.data.frame(res)) +
+  aes(res$log2FoldChange, -log(padj)) +
+  geom_point(col=mycols) +
+  geom_vline(xintercept = c(-2,+2), col= "red") +
+  geom_hline(yintercept = -log(0.05), col="red") +
+  theme_bw() +
+  labs(title = "Plot of Log2 Fold-Change vs. -log(Adjusted P-value)",
+       x= "Log2 Fold-Change",
+       y = "-log(Adjusted P-value)")
+```
+
+# Pathway analysis 
+## KEGG genesets/paathways
+
+```{r}
+data(kegg.sets.hs)
+data(sigmet.idx.hs)
+
+# Focus on signaling and metabolic pathways only
+kegg.sets.hs = kegg.sets.hs[sigmet.idx.hs]
+
+# Examine the first 3 pathways
+head(kegg.sets.hs, 3)
+```
+
+```{r}
+foldchanges = res$log2FoldChange
+names(foldchanges) = res$entrez
+head(foldchanges)
+```
+
+```{r}
+keggres = gage(foldchanges, gsets=kegg.sets.hs)
+```
+
+```{r}
+attributes(keggres)
+```
+
+```{r}
+head(keggres$less, 4)
+```
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id="hsa04110")
+```
+
+![How HOXA1 knockdown affects gene expression in the cell cycle pathway in human fibroblasts](hsa04110.pathview.png)
+
+```{r}
+## Focus on top 5 upregulated pathways here for demo purposes only
+keggrespathways <- rownames(keggres$greater)[1:5]
+```
+
+```{r}
+# Extract the 8 character long IDs part of each string
+keggresids = substr(keggrespathways, start=1, stop=8)
+keggresids
+```
+
+> Q. Can you do the same procedure as above to plot the pathview figures for the top 5 down-reguled pathways?
+
+```{r}
+## Focus on top 5 downregulated pathways here for demo purposes only
+keggresdownpathways <- rownames(keggres$less)[1:5]
+
+# Extract the 8 character long IDs part of each string
+keggresidsd = substr(keggresdownpathways, start=1, stop=8)
+keggresidsd
+```
+
+```{r, message=FALSE}
+pathview(gene.data=foldchanges, pathway.id=keggresidsd, species="hsa")
+```
+
+
+![Top second down-regulated pathway](hsa03030.pathview.png)
+
+![Top third down-regulated pathways](hsa03013.pathview.png)
+
+![Top fourth down-regulated pathways](hsa03440.pathview.png)
+
+![Top fifth down-regulated pathways](hsa04114.pathview.png)
+
+# Gene Ontology (GO) genesets
+
+```{r}
+data(go.sets.hs)
+data(go.subs.hs)
+
+# Focus on Biological Process subset of GO
+gobpsets = go.sets.hs[go.subs.hs$BP]
+
+gobpres = gage(foldchanges, gsets=gobpsets)
+```
+
+```{r}
+head(gobpres$less, 5)
+```
+
+# Reactome analysis online 
+
+We need to make a little file of our significant genes that we can upload to the reactome webpage: 
+
+```{r}
+sig_genes <- res[res$padj <= 0.05 & !is.na(res$padj), "symbol"]
+print(paste("Total number of significant genes:", length(sig_genes)))
+```
+
+```{r}
+sig_genes[6]
+```
+
+```{r}
+write.table(sig_genes, file="significant_genes.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+```
+
+Then, to perform pathway analysis online go to the Reactome website (https://reactome.org/PathwayBrowser/#TOOL=AT). Select “choose file” to upload your significant gene list. Then, select the parameters “Project to Humans”, then click “Analyze”.
+
+![How HOXA1 suppression impacts different stages of the cell cycle, providing insights into its role in cell division and proliferation](R-HSA-69278.png)
+
+> Q. What pathway has the most significant “Entities p-value”? Do the most significant pathways listed match your previous KEGG results? What factors could cause differences between the two methods?
+
+Based on Reactome analysis, "cell cycle" has the most significant Entities p-value as it is the lowest  9.3E-5. The Reactome analysis lists several different pathways ranked by Entities p-value, reflecting how statistically significant enriched a pathway is with the the differentially expressed genes (DEGs) from RNASeq analysis. This result illustrates how many of the differentially expressed genes fall within the cell cycle pathway, to infer HOXA1 knockdown influences genes regulating the cell cycle.
+
+With this result, I believe that the most significant pathways listed match my previous KEGG results. Based on KEGG analysis, the top less/down pathways was found as cell cycle with KEGG pathway identifier, "hsa04110", meaning that the top enriched pathways is cell cycle among the pathways with mostly down-regulated genes, the genes whose expression decreased after HOXA1 knockdown. The Reactome and KEGG pathway analysis both identify the cell cycle pathway as significantly enriched with down-regulated genes in particular, ensuring the HOXA1 knockdown disrupts cell cycle gene regulation. 
+
+Lastly, the KEGG pathway database is more likely to provide functional annotation as well as information about gene products that interact with each other in a given pathway, how they interact, and where they interact. Therefore, KEGG has the potential to provide extra metabolic insight beyond annotation lists of simple molecular function, process. On the other hand, the Reactome is database consisting of biological molecules and their relation to pathways and processes to more focus on biochemical analysis. Moreover, I felt that the KEGG tends to group more broader processes, whereas the Reactome more focus on the finer-grained sub-pathways.
